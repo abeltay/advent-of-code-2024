@@ -33,16 +33,16 @@ func part1(filename string) int {
 	in := parseInput(filename)
 	var ans int
 	for _, row := range in {
-		if isSafe(row, 1, 3) {
+		if isSafe(row) {
 			ans++
 		}
 	}
 	return ans
 }
 
-func isSafe(arr []int, allowMin, allowMax int) bool {
+func isSafe(arr []int) bool {
 	var increasing bool
-	if arr[0] <= arr[1]-allowMin {
+	if arr[0] <= arr[1]-1 {
 		increasing = true
 	}
 	for i := 1; i < len(arr); i++ {
@@ -52,7 +52,7 @@ func isSafe(arr []int, allowMin, allowMax int) bool {
 		} else {
 			diff = arr[i-1] - arr[i]
 		}
-		if diff < allowMin || diff > allowMax {
+		if diff < 1 || diff > 3 {
 			return false
 		}
 	}
@@ -63,17 +63,13 @@ func part2(filename string) int {
 	in := parseInput(filename)
 	var ans int
 	for _, row := range in {
-		if isSafe(row, 1, 3) {
-			ans++
-		} else {
-			for i := 1; i <= len(row); i++ {
-				var n []int
-				n = append(n, row[:i-1]...)
-				n = append(n, row[i:]...)
-				if isSafe(n, 1, 3) {
-					ans++
-					break
-				}
+		for i := 1; i <= len(row); i++ {
+			var n []int
+			n = append(n, row[:i-1]...)
+			n = append(n, row[i:]...)
+			if isSafe(n) {
+				ans++
+				break
 			}
 		}
 	}
