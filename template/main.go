@@ -35,6 +35,7 @@ func parseInput(filename string) [][]byte {
 
 func part1(filename string) int {
 	in := parseInput(filename)
+	var ans int
 	for _, row := range in {
 		for _, item := range row {
 			fmt.Print(string(item))
@@ -42,7 +43,6 @@ func part1(filename string) int {
 		fmt.Println()
 	}
 	// fmt.Println(in)
-	var ans int
 	return ans
 }
 
