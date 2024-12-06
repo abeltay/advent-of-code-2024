@@ -2,9 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
 
 	"github.com/abeltay/advent-of-code-2024/utilities"
 )
@@ -40,17 +37,21 @@ func step(x, y, direction int) (int, int) {
 	return x, y
 }
 
-func walk(floor [][]byte, x, y int) map[string]bool {
-	visited := make(map[string]bool)
+func key(rowLength, x, y int) int {
+	return y*rowLength + x
+}
+
+func walk(floor [][]byte, x, y int) map[int]bool {
+	visited := make(map[int]bool)
 	var direction int
+	rowLength := len(floor[0])
 	for {
 		newX, newY := step(x, y, direction)
 		if newX < 0 || newY < 0 || newX >= len(floor[0]) || newY >= len(floor) {
 			return visited
 		}
 		if floor[newY][newX] != '#' {
-			s := fmt.Sprintf("%d,%d", newX, newY)
-			visited[s] = true
+			visited[key(rowLength, newX, newY)] = true
 			x, y = newX, newY
 		} else {
 			direction = turn(direction)
@@ -79,20 +80,12 @@ func turn(direction int) int {
 	return direction
 }
 
-func walk2(floor [][]byte, x, y int, path map[string]bool) int {
+func walk2(floor [][]byte, x, y int, path map[int]bool) int {
 	var ans int
+	rowLength := len(floor[0])
 	for k := range path {
-		s := strings.Split(k, ",")
-		blockX, err := strconv.Atoi(s[0])
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-		blockY, err := strconv.Atoi(s[1])
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+		blockX := k % rowLength
+		blockY := k / rowLength
 		if hasLoop(floor, x, y, blockX, blockY) {
 			ans++
 			continue
@@ -128,8 +121,8 @@ func part2(filename string) int {
 		for x := 0; x < len(in[y]); x++ {
 			if in[y][x] == '^' {
 				visited := walk(in, x, y)
-				s := fmt.Sprintf("%d,%d", x, y)
-				delete(visited, s)
+				rowLength := len(in[0])
+				delete(visited, key(rowLength, x, y))
 				return walk2(in, x, y, visited)
 			}
 		}
