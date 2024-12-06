@@ -1,11 +1,15 @@
 fun main() {
     fun convertInput(input: List<String>): Pair<MutableList<Int>, MutableList<Int>> {
+        val inputLineRegex = """(\d+)\s*(\d+)""".toRegex()
         val left = mutableListOf<Int>()
         val right = mutableListOf<Int>()
         input.map {
-            val s = it.split("   ")
-            left.add(s[0].toInt())
-            right.add(s[1].toInt())
+            val (l, r) = inputLineRegex
+                .matchEntire(it)
+                ?.destructured
+                ?: throw IllegalArgumentException("Incorrect input line $it")
+            left.add(l.toInt())
+            right.add(r.toInt())
         }
         return Pair(left, right)
     }
