@@ -1,5 +1,3 @@
-[![Go](https://github.com/abeltay/advent-of-code-2024/actions/workflows/go.yml/badge.svg)](https://github.com/abeltay/advent-of-code-2024/actions/workflows/go.yml)
-
 # Advent of Code 2024
 
 My attempt at <https://adventofcode.com/2024>
