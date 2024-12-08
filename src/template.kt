@@ -10,7 +10,7 @@ fun main() {
     // Test if implementation meets criteria from the description, like:
     // check(part1(listOf("test_input")) == 11)
 
-    // Or read a large test input from the `src/Day{TEMPLATE}_test.txt` file:
+    // Read a large test input from the `src/Day{TEMPLATE}_test.txt` file:
     val testInput = readInput("Day{TEMPLATE}_test")
     check(part1(testInput) == 1)
     // check(part2(testInput) == 1)
