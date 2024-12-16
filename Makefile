@@ -2,7 +2,7 @@ prep:
 	echo $(DAY) > day.txt
 	cp src/template.kt src/Day$(DAY).kt
 	sed -i '' -e 's/{TEMPLATE}/$(DAY)/g' src/Day$(DAY).kt
-	touch src/Day$(DAY)_test.txt
+	touch src/Day$(DAY)_test1.txt
 
 input: DAY=$(shell cat day.txt)
 input: COOKIE=$(shell cat cookie.txt)
