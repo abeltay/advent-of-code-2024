@@ -8,7 +8,8 @@ fun main() {
     }
 
     // Test if implementation meets criteria from the description, like:
-    // check(part1(listOf("test_input")) == 11)
+    // val testInput1 = readInput("Day{TEMPLATE}_test1")
+    // check(part1(testInput1) == 1)
 
     // Read a large test input from the `src/Day{TEMPLATE}_test.txt` file:
     val testInput = readInput("Day{TEMPLATE}_test")
